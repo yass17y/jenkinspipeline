@@ -26,9 +26,11 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp -i /tmp/tomcat.pem **/target/*.war ec2-user@${params.tomcat_dev}:/tmp"
-			sh "ssh -i /tmp/tomcat.pem ec2-user@${params.tomcat_dev}"
-			sh "sudo cp /tmp/*.war /opt/tomcat/webapps/
+                        sh '''
+			scp -i /tmp/tomcat.pem **/target/*.war ec2-user@${params.tomcat_dev}:/tmp
+			ssh -i /tmp/tomcat.pem ec2-user@${params.tomcat_dev}
+			sudo cp /tmp/*.war /opt/tomcat/webapps/
+			'''
                     }
                 }
 
