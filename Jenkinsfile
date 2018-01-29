@@ -27,6 +27,7 @@ stages{
                 stage ('Deploy to Staging'){
                     steps {
                         sh '''
+			"cd /root/.jenkins/workspace/FullyAutomated"
 			"scp -i /tmp/tomcat.pem **/target/*.war ec2-user@54.154.241.222:/tmp"
 			"ssh -i /tmp/tomcat.pem ec2-user@54.154.241.222"
 			"sudo cp /tmp/*.war /opt/tomcat/webapps/"
